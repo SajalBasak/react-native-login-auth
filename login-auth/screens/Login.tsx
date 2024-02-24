@@ -1,11 +1,13 @@
 import { StyleSheet, Text, TextInput, View, ActivityIndicator, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/slices/AuthSlice';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Login = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const dispatch: any = useDispatch();
     const { userData, isLoading }: any = useSelector((state: any) => state.auth);
@@ -16,6 +18,10 @@ const Login = () => {
             password: password,
         };
         dispatch(login(params));
+    };
+
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
     };
 
     return (
@@ -29,14 +35,23 @@ const Login = () => {
                 placeholderTextColor="grey"
                 autoCapitalize="none"
             />
-            <TextInput
-                value={password}
-                placeholder="Enter Password"
-                onChangeText={setPassword}
-                style={styles.input}
-                placeholderTextColor="grey"
-                secureTextEntry={true}
-            />
+            <View style={styles.innerContainer}>
+                <TextInput
+                    value={password}
+                    placeholder="Enter Password"
+                    onChangeText={setPassword}
+                    style={styles.passInput}
+                    placeholderTextColor="grey"
+                    secureTextEntry={!showPassword}
+                />
+                <MaterialCommunityIcons
+                    name={showPassword ? 'eye-off' : 'eye'}
+                    size={24}
+                    color="#aaa"
+                    style={styles.icon}
+                    onPress={toggleShowPassword}
+                />
+            </View>
             <Pressable onPress={handlingLogin} style={styles.btnContainer}>
                 <Text style={styles.btnTitle}>Login</Text>
                 {isLoading && <ActivityIndicator size="small" color={'white'} />}
@@ -54,6 +69,16 @@ const styles = StyleSheet.create({
         paddingTop: 150,
         paddingHorizontal: '5%',
     },
+    innerContainer: {
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        backgroundColor: '#f3f3f3',
+        paddingHorizontal: 14,
+        borderWidth: 1,
+        borderRadius: 25,
+        borderColor: '#235787',
+    },
     title: {
         fontSize: 26,
         color: '#000',
@@ -66,6 +91,11 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         borderColor: '#235787',
         paddingHorizontal: 20,
+    },
+    passInput: {
+        flex: 1,
+        height: 45,
+        paddingHorizontal: 5
     },
     btnContainer: {
         backgroundColor: '#235787',
@@ -80,5 +110,8 @@ const styles = StyleSheet.create({
     btnTitle: {
         color: 'white',
         fontSize: 18,
+    },
+    icon: {
+        marginLeft: 10,
     },
 });
