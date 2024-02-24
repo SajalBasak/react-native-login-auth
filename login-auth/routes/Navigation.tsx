@@ -7,10 +7,10 @@ import {useSelector} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
-const AppNavigation = () => {
+const Navigation = () => {
   const {userData} = useSelector((state: any) => state.auth);
   console.log(
-    '🚀 ~ file: AppNavigation.js:17 ~ AppNavigation ~ userData:',
+    '🚀 ~ file: Navigation.js:17 ~ Navigation ~ userData:',
     userData,
   );
   return (
@@ -30,6 +30,6 @@ const AppNavigation = () => {
   );
 };
 
-export default AppNavigation;
+export default Navigation;
 
 const styles = StyleSheet.create({});
