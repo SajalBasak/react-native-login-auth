@@ -20,6 +20,7 @@ export const login = createAsyncThunk('login', async (params: any, { rejectWithV
         const response = await API.post('/login', params);
         return response.data;
     } catch (error) {
+        alert(error);
         return rejectWithValue(error);
     }
 });
@@ -44,6 +45,7 @@ const AuthSlice = createSlice({
         builder.addCase(login.rejected, (state) => {
             state.isLoading = false;
             state.isError = true;
+            alert("Something went wrong.");
         });
     },
 });
