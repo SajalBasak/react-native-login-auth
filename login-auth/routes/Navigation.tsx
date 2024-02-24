@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../screens/Login';
 import {NavigationContainer} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
+import Home from '../screens/Home';
 
 const Stack = createNativeStackNavigator();
 

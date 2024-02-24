@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/slices/AuthSlice';
 
 const Login = () => {
-    const [email, setEmail] = useState<string>('');
+    const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
     const dispatch: any = useDispatch();
@@ -12,7 +12,7 @@ const Login = () => {
 
     const handlingLogin = () => {
         const params = {
-            username: email,
+            username: username,
             password: password,
         };
         console.log('params:', params);
@@ -21,11 +21,11 @@ const Login = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Login</Text>
+            <Text style={styles.title}>Login to your account</Text>
             <TextInput
-                value={email}
-                placeholder="Enter Email"
-                onChangeText={setEmail}
+                value={username}
+                placeholder="Enter Username"
+                onChangeText={setUsername}
                 style={styles.input}
                 placeholderTextColor="grey"
                 autoCapitalize="none"
@@ -38,8 +38,8 @@ const Login = () => {
                 placeholderTextColor="grey"
                 secureTextEntry={true}
             />
-            <Pressable onPress={handlingLogin} style={styles.container}>
-                <Text style={styles.title}>Login</Text>
+            <Pressable onPress={handlingLogin} style={styles.btnContainer}>
+                <Text style={styles.btnTitle}>Login</Text>
                 {isLoading && <ActivityIndicator size="small" color={'white'} />}
             </Pressable>
         </View>
@@ -56,10 +56,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: '5%',
     },
     title: {
-        fontSize: 36,
+        fontSize: 26,
         color: '#000',
-        fontWeight: 'bold',
         textAlign: 'center',
+        paddingBottom: 50
     },
     input: {
         height: 45,
@@ -68,4 +68,18 @@ const styles = StyleSheet.create({
         borderColor: 'coral',
         paddingHorizontal: 20,
     },
+    btnContainer: {
+        backgroundColor: 'lightcoral',
+        borderRadius: 25,
+        width: '100%',
+        height: 45,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        gap: 10,
+    },
+    btnTitle: {
+        color: 'white',
+        fontSize: 18,
+      },
 });
