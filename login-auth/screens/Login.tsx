@@ -15,13 +15,12 @@ const Login = () => {
             username: username,
             password: password,
         };
-        console.log('params:', params);
         dispatch(login(params));
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Login to your account</Text>
+            <Text style={styles.title}>Login to your account.</Text>
             <TextInput
                 value={username}
                 placeholder="Enter Username"
@@ -65,11 +64,11 @@ const styles = StyleSheet.create({
         height: 45,
         borderWidth: 1,
         borderRadius: 25,
-        borderColor: 'coral',
+        borderColor: '#235787',
         paddingHorizontal: 20,
     },
     btnContainer: {
-        backgroundColor: 'lightcoral',
+        backgroundColor: '#235787',
         borderRadius: 25,
         width: '100%',
         height: 45,
@@ -81,5 +80,5 @@ const styles = StyleSheet.create({
     btnTitle: {
         color: 'white',
         fontSize: 18,
-      },
+    },
 });

@@ -16,13 +16,10 @@ const initialState: AuthState = {
 };
 
 export const login = createAsyncThunk('login', async (params: any, { rejectWithValue }) => {
-    console.log('params: ', params);
     try {
         const response = await API.post('/login', params);
-        console.log('response: ', response);
         return response.data;
     } catch (error) {
-        console.log('error: ', error);
         return rejectWithValue(error);
     }
 });
@@ -30,7 +27,11 @@ export const login = createAsyncThunk('login', async (params: any, { rejectWithV
 const AuthSlice = createSlice({
     name: 'authSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        logout: (state) => {
+            state.userData = null;
+        }
+    },
     extraReducers: builder => {
         builder.addCase(login.pending, state => {
             state.isLoading = true;
@@ -46,5 +47,7 @@ const AuthSlice = createSlice({
         });
     },
 });
+
+export const { logout } = AuthSlice.actions;
 
 export default AuthSlice.reducer;
